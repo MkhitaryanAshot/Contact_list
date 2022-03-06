@@ -1,0 +1,36 @@
+﻿
+#justblue {
+    width: 100px;
+    height: 3px;
+    background-color: aqua;
+    /*border-radius:50%;*/
+}
+
+#table {
+    position: absolute;
+    top: 70px;
+    left: 10%;
+    border-color: lightgray;
+    width: 75%;
+    font-size: 20px;
+    height: 500px;
+}
+
+table, td, th {
+    border: 1px solid lightgray;
+    border-left-style: none;
+    border-right-style: none;
+}
+
+.for_pic {
+    width: 45px;
+    height: 55px;
+}
+
+footer {
+    width: 100%;
+    height: 310px;
+    background-color: lightgray;
+    position: absolute;
+    top: 180%;
+}
