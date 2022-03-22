@@ -1,17 +1,15 @@
+using Contact_list.DAL.DataAccess;
 using Contact_list.DAL.Interfaces;
 using Contact_list.DAL.Repositories;
-using Contact_list.DAL.DataAccess;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-builder.Services.AddDbContext<AppliactionDBContext>(opt => opt.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddSingleton<AppliactionDBContext>();
 
 builder.Services.AddControllersWithViews();
-builder.Services.AddScoped(typeof(IContactsRepository),typeof(ContactsRepository));
-builder.Services.AddScoped(typeof(IAddressrepository),typeof(AddressRepository));
+builder.Services.AddScoped(typeof(IContactsRepository), typeof(ContactsRepository));
+builder.Services.AddScoped(typeof(IAddressrepository), typeof(AddressRepository));
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 var app = builder.Build();
 

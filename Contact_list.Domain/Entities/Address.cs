@@ -1,7 +1,11 @@
-﻿namespace Contact_list.Domain.Entities
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+
+namespace Contact_list.Domain.Entities
 {
     public class Address
     {
+        [Key]
         public int Id { get; set; }
         public string Country { get; set; }
         public string City { get; set; }

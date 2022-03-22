@@ -1,12 +1,8 @@
 ﻿using Contact_list.DAL.Interfaces;
 using Contact_list.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Data.Entity;
 using System.Threading.Tasks;
 using Contact_list.DAL.DataAccess;
-using Microsoft.EntityFrameworkCore;
 
 namespace Contact_list.DAL.Repositories
 {
@@ -17,10 +13,11 @@ namespace Contact_list.DAL.Repositories
         {
             _dbcontext = context;
         }
-        public Address CreateAsync(Address address)
+        public async Task< Address> CreateAsync(Address address)
         {
             var created = _dbcontext.Addresses.Add(address);
-            return created.Entity;
+            await _dbcontext.SaveChangesAsync();
+            return created;
         }
 
         public async Task<Address> GetById(int id)
@@ -29,14 +26,14 @@ namespace Contact_list.DAL.Repositories
         }
 
 
-        public async Task<Address?> GetDuplication(Address address)
+        public async Task<Address> GetDuplication(Address address)
         {
-            return await _dbcontext.Addresses.FirstOrDefaultAsync(
+            return  await _dbcontext.Addresses.FirstOrDefaultAsync(
                           c => c.Country == address.Country &&
                           c.City == address.City &&
                           c.Street == address.Street &&
                           c.Building == address.Building
-      );
+                     );
         }
     }
 }

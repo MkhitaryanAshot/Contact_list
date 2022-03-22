@@ -1,33 +1,20 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System.Configuration;
-using Contact_list.DAL.FluentApiConfigurations;
-using Contact_list.Domain.Entities;
-using Microsoft.Extensions.Configuration;
+﻿using Contact_list.Domain.Entities;
+using System.Data.Entity;
 
 namespace Contact_list.DAL.DataAccess
 {
-    public class AppliactionDBContext:DbContext
+    public class AppliactionDBContext : DbContext
     {
         public DbSet<Contact> Contacts { get; set; }
         public DbSet<Address> Addresses { get; set; }
-        public AppliactionDBContext(DbContextOptions<AppliactionDBContext> options):base(options)
+        public AppliactionDBContext() : base("name=Contactinfo")
         {
 
         }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            base.OnConfiguring(optionsBuilder);
-        }
-
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-
             base.OnModelCreating(modelBuilder);
-
-            modelBuilder.ApplyConfiguration(new ContactsConfigs());
         }
-
-        
     }
 }

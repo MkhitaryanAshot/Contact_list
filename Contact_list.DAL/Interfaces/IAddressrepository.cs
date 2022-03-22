@@ -10,7 +10,7 @@ namespace Contact_list.DAL.Interfaces
     public interface IAddressrepository
     {
 
-        Address CreateAsync(Address cont);
+        Task<Address> CreateAsync(Address cont);
         Task<Address> GetDuplication(Address address);
     }
 }

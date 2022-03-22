@@ -3,7 +3,9 @@ using Contact_list.DAL.Interfaces;
 using System;
 using System.Linq;
 using Contact_list.DAL.DataAccess;
-using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
+using System.Data.Entity;
+using System.Collections.Generic;
 
 namespace Contact_list.DAL.Repositories
 {
@@ -20,17 +22,16 @@ namespace Contact_list.DAL.Repositories
 
         public List<Contact> Get()
         {
-            
-            return _dbcontext.Contacts.Include(c=>c.Address).ToList();
+
+            return _dbcontext.Contacts.Include(c => c.Address).ToList(); 
         }
 
         public async Task<Contact> GetById(int id)
         {
-            var contact = await _dbcontext.Contacts.Include(c=>c.Address).FirstOrDefaultAsync(c => c.Id == id);
+            var contact = await _dbcontext.Contacts.Include(c => c.Address).FirstOrDefaultAsync(c => c.Id == id); 
 
             if (contact == null)
             {
-                //
                 throw new Exception();
             }
             return contact;
@@ -48,18 +49,18 @@ namespace Contact_list.DAL.Repositories
 
             var address = await _addressrepository.GetDuplication(cont.Address);
 
-            if(address == null)
-            { 
-                var createdaddress = _addressrepository.CreateAsync(cont.Address);
-                await _dbcontext.SaveChangesAsync();
-                contact.AddresId = createdaddress.Id;
+            if (address == null)
+            {
+                var createdaddress = await _addressrepository.CreateAsync(cont.Address);
+               
+                contact.AddressId = createdaddress.Id;
             }
             else
             {
-                contact.AddresId = address.Id;
+                contact.AddressId = address.Id;
             }
 
-            await _dbcontext.Contacts.AddAsync(contact);
+            _dbcontext.Contacts.Add(contact);
             await _dbcontext.SaveChangesAsync();
         }
 
@@ -84,14 +85,14 @@ namespace Contact_list.DAL.Repositories
             {
                 var createdaddress = _addressrepository.CreateAsync(cont.Address);
                 await _dbcontext.SaveChangesAsync();
-                contact.AddresId = createdaddress.Id;
+                contact.AddressId = createdaddress.Id;
             }
             else
             {
-                contact.AddresId = address.Id;
+                contact.AddressId = address.Id;
             }
 
-            _dbcontext.Contacts.Update(contact);
+            _dbcontext.Contacts.Attach(contact);
             await _dbcontext.SaveChangesAsync();
         }
 

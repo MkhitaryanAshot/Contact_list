@@ -1,4 +1,6 @@
 ﻿using Contact_list.Domain.Entities;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Contact_list.DAL.Interfaces
 {

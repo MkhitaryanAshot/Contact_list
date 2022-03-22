@@ -1,20 +1,24 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFramework>net6.0</TargetFramework>
-		<ImplicitUsings>enable</ImplicitUsings>
-		<Nullable>enable</Nullable>
+		<TargetFramework>net4.6.2</TargetFramework>
+		<ImplicitUsings>disable</ImplicitUsings>
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.2" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.2" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.2" />
-		<PackageReference Include="Microsoft.Extensions.Configuration" Version="6.0.0" />
+		<PackageReference Include="EntityFramework" Version="6.3.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Mvc.DataAnnotations" Version="2.2.0" />
+		<PackageReference Include="Microsoft.Extensions.Configuration" Version="5.0.0" />
   </ItemGroup>
 
 	<ItemGroup>
 	  <ProjectReference Include="..\Contact_list.Domain\Contact_list.Domain.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <EmbeddedResource Update="Migrations\202203221707444_Initial.resx">
+	    <DependentUpon>202203221707444_Initial.cs</DependentUpon>
+	  </EmbeddedResource>
 	</ItemGroup>
 
 </Project>
